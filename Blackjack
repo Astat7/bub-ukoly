@@ -68,7 +68,8 @@ int main() {
     while(loop)   
     {  
         printf("\nWould you like to draw another card? (Y/N):"); 
-        char input = getchar(); 
+        char input; 
+        scanf("%c", &input);
         switch(input) 
             { 
                 case 'Y': drawCard(deck, points); break; 
@@ -78,4 +79,4 @@ int main() {
             } 
     }   
     return 0;   
-}   
+} 
