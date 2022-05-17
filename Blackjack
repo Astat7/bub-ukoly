@@ -1,0 +1,81 @@
+#include <stdio.h>   
+#include <stdlib.h>   
+#include <time.h>   
+
+void drawCard(int dec[13][4], int point)  
+{   
+    int x;   
+    int y;   
+
+    do{   
+        x = rand() % 13;   
+        y = rand() % 4;   
+    }while(dec[x][y] != 1);   
+    switch(y)   
+    {   
+        case 0: printf("Club "); break;   
+        case 1: printf("Spade "); break;   
+        case 2: printf("Heart "); break;   
+        case 3: printf("Diamond "); break;   
+
+    }   
+    if(x >= 0 && x <= 8)   
+    {   
+        printf("%d", x + 2); 
+        point += x + 2; 
+    }else   
+    {   
+        switch(x)   
+        {   
+            case 9: printf("Queen"); point += 10; break;   
+            case 10: printf("King"); point += 10; break;   
+            case 11: printf("Jack"); point += 10; break;   
+            case 12: printf("Ace"); 
+            printf("\nWould you like to count this as: \nA:11\nB:1"); 
+            char key = getchar(); 
+            switch(key) 
+            { 
+                case 'A': point += 11; break; 
+                case 'a': point += 11; break; 
+                case 'B': point += 1; break; 
+                case 'b': point += 1; break; 
+            } 
+            break;  
+        }   
+    }   
+}   
+  
+
+int main() {   
+    int points = 0; 
+
+    srand(time(NULL));   
+
+    int deck[13][4];   
+
+    for(int i = 0;i < 4;i++  ){   
+        for(int f = 0;f < 13; f++){   
+        deck[f][i] = 1;   
+        }   
+    }  
+
+    printf("Your cards: ");   
+    drawCard(deck, points);   
+    printf(" and ");   
+    drawCard(deck, points);   
+
+    int loop = 1; 
+    while(loop)   
+    {  
+        printf("\nWould you like to draw another card? (Y/N):"); 
+        char input = getchar(); 
+        switch(input) 
+            { 
+                case 'Y': drawCard(deck, points); break; 
+                case 'y': drawCard(deck, points); break; 
+                case 'N': loop = 0; printf("Your points: %d", points); break; 
+                case 'n': loop = 0; printf("Your points: %d", points); break; 
+            } 
+    }   
+    return 0;   
+}   
